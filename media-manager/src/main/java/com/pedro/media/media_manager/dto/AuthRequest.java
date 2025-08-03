@@ -2,15 +2,15 @@ package com.pedro.media.media_manager.dto;
 
 public class AuthRequest {
 
-    private String user;
+    private String username;
     private String password;
 
-    public String getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUsername(String user) {
+        this.username = user;
     }
 
     public String getPassword() {

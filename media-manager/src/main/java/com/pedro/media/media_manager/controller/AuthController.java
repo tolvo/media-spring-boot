@@ -38,10 +38,10 @@ public class AuthController {
     public Map<String, String> login(@RequestBody AuthRequest request) {
         try {
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUser(), request.getPassword())
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
 
-            String token = jwtUtil.generateToken(request.getUser());
+            String token = jwtUtil.generateToken(request.getUsername());
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
             return response;
@@ -53,12 +53,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody AuthRequest request) {
-        if (userRepository.findByName(request.getUser()).isPresent()) {
+        if (userRepository.findByName(request.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Usuário já existe");
         }
 
         User user = new User();
-        user.setName(request.getUser());
+        user.setName(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRoles(List.of("USER"));
 

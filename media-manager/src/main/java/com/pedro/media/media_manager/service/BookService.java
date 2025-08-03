@@ -44,7 +44,7 @@ public class BookService {
         existingBook.setStartReadDate(updatedBook.getStartReadDate());
         existingBook.setRate(updatedBook.getRate());
 
-        return bookRepository.save(existingBook);
+        return bookRepository.saveAndFlush(updatedBook);
     }
 
     public Book markAsRead(Long id, LocalDate d) {
